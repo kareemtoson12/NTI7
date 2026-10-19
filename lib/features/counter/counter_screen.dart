@@ -14,6 +14,7 @@ class CounterScreen extends StatelessWidget {
         mainAxisAlignment: .center,
         children: [
           BlocBuilder<CounterCubit, CounterStates>(
+            
             builder: (context, state) {
               return Center(
                 child: Text("${state.counter}", style: TextStyle(fontSize: 30)),
