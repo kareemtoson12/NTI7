@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:nti7/features/todo/cubit/todo_cubit.dart';
-import 'package:nti7/features/todo/todo_screen.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:nti7/features/responsive/responsive_screen.dart';
 
 void main() {
   runApp(MyApp());
@@ -12,12 +11,11 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-         
-      home: MultiBlocProvider(
-        providers: [BlocProvider(create: (context) => TodoCubit())],
-        child: TodoScreen(),
-      ),
+    return ScreenUtilInit(
+      designSize: const Size(360, 690),
+      builder: (context, child) {
+        return MaterialApp(home: ResponsiveScreen());
+      },
     );
   }
 }
