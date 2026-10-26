@@ -1,21 +1,25 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:nti7/features/responsive/responsive_screen.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:nti7/features/home/cubit/home_cubit.dart';
+import 'package:nti7/features/home/home_screen.dart';
 
-void main() {
-  runApp(MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Hive.initFlutter();
+  await Hive.openBox('name');
+
+  runApp(App());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class App extends StatelessWidget {
+  const App({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return ScreenUtilInit(
-      designSize: const Size(360, 690),
-      builder: (context, child) {
-        return MaterialApp(home: ResponsiveScreen());
-      },
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: BlocProvider(create: (context) => HomeCubit(), child: HomeScreen()),
     );
   }
 }
